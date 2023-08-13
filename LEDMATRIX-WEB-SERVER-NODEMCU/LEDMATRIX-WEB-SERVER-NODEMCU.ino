@@ -42,13 +42,14 @@ const char *ssid = "mikonku-led-matrix"; // The name of the Wi-Fi network that w
 const char *password = "mikonku123";  // The password required to connect to it, leave blank for an open network
 void setup(void) {
   P.begin();
-  Serial.begin(115200);  // Start the Serial communication to send messages to the computer
+  Serial.begin(9600);  // Start the Serial communication to send messages to the computer
   delay(10);
   Serial.println('\n');
   text_led = "Hello World";
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP(ssid, password);
+  WiFi.softAP(ssid);
+  // WiFi.softAP(ssid, password);
 
   // if DNSServer is started with "*" for domain name, it will reply with
   // provided IP to all DNS request
@@ -66,4 +67,3 @@ void loop(void) {
   if (P.displayAnimate())
     P.displayText(text_led.c_str(), PA_CENTER, 100, 100, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
 }
-
